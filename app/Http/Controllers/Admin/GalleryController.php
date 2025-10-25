@@ -112,12 +112,13 @@ class GalleryController extends Controller
 
     }
 
-    public function edit(Request $request,Course $course)
+    public function edit(Request $request,Gallery $gallery)
     {
-        abort_if(Gate::denies('course_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        abort_if(Gate::denies('notice_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-               $view = View::make('backend.gallery.edit', compact('course'))->render();
+               $view = View::make('backend.gallery.edit', compact('gallery'))->render();
                return response()->json(['html' => $view]);
 
          } else {
@@ -126,7 +127,7 @@ class GalleryController extends Controller
 
     }
 
-    public function update(UpdateCourseRequest $request, Course $course)
+    public function update(UpdateCourseRequest $request, Gallery  $gallery)
     {
         if ($request->ajax()) {
 
@@ -147,11 +148,11 @@ class GalleryController extends Controller
                 // image  start
                 if ($request->hasFile('image')) {
                     if ($request->file('image')->isValid()) {
-                        unlink(public_path($course->image));
-                       $destinationPath = public_path('backend/media/course/');
+                        unlink(public_path($gallery->image));
+                       $destinationPath = public_path('backend/media/gallery/');
                        $extension = $request->file('image')->getClientOriginalExtension();
                        $fileName = time() . '.' . $extension;
-                       $file_path = 'backend/media/course/' . $fileName;
+                       $file_path = 'backend/media/gallery/' . $fileName;
                        $request->file('image')->move($destinationPath, $fileName);
                        $data['image'] = $file_path;
                     } else {
@@ -165,7 +166,7 @@ class GalleryController extends Controller
 
                DB::beginTransaction();
                try {
-                  $course->update($data);
+                  $gallery->update($data);
                   DB::commit();
                   return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
 
@@ -180,11 +181,11 @@ class GalleryController extends Controller
          }
     }
 
-    public function show(Course $course)
+    public function show(Gallery $gallery)
     {
-        abort_if(Gate::denies('course_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('notice_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('backend.course.show', compact('course'));
+        return view('backend.gallery.show', compact('gallery'));
     }
 
     public function destroy(Request $request,Gallery $gallery)

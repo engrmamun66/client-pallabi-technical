@@ -3,14 +3,14 @@
         <div id="status"></div>
         {{method_field('PATCH')}}
         <div class="form-group col-md-6 col-sm-12">
-            <label for=""> course title </label>
-            <input type="text" class="form-control" id="title" name="title" value="{{ $course->title }}"
+            <label for=""> Gallery title </label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ $gallery->title }}"
                    placeholder="" required>
             <span id="error_name" class="has-error"></span>
         </div>
         <div class="form-group col-md-6 col-sm-12">
             <label for=""> Description </label>
-            <input type="text" class="form-control" id="description" name="description" value="{{ $course->description }}" placeholder="">
+            <input type="text" class="form-control" id="description" name="description" value="{{ $gallery->description }}" placeholder="">
             <span id="error_description" class="has-error"></span>
         </div>
         <div class="form-group col-md-6 col-sm-6">
@@ -21,7 +21,7 @@
                     <a class="btn btn-secondary text-white" onclick="$('input[id=image]').click();">Browse</a>
                 </div>
                 <input type="text" name="SelectedFileName" class="form-control" id="SelectedFileName"
-                       value="{{ $course->image }}" readonly>
+                       value="{{ $gallery->image }}" readonly>
             </div>
             <script type="text/javascript">
                 $('input[id=image]').change(function () {
@@ -50,7 +50,7 @@
             // Messages for form validation
             messages: {
                 title: {
-                    required: 'Enter course Title'
+                    required: 'Enter gallery Title'
                 }
             },
             submitHandler: function (form) {
@@ -60,7 +60,7 @@
                 myData.append('_token', CSRF_TOKEN);
 
                 $.ajax({
-                    url: 'courses/' + '{{ $course->id }}',
+                    url: 'galleries/' + '{{ $gallery->id }}',
                     type: 'POST',
                     data: myData,
                     dataType: 'json',
