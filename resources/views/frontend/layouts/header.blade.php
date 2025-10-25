@@ -69,7 +69,7 @@
 
                                 <ul class="sub-menu">
                                     <li><a href="{{ route('notice.page') }}">Notice</a></li>
-                                    <li><a href="{{ route('events.page') }}">Events</a></li>
+                                    <!-- <li><a href="{{ route('events.page') }}">Events</a></li> -->
                                     <li><a href="{{ route('gallery.page') }}">Gallery</a></li>
                                 </ul>
                             </li>
