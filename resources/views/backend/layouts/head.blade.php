@@ -26,8 +26,13 @@
 <script src="{{ asset('/assets/js/jquery-3.4.1.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('/assets/js/bootstrap.min.js') }}"></script>
-<script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 
 <script>
     var CSRF_TOKEN = "{{ csrf_token() }}";
 </script>
+<style>
+.cke_notifications_area{
+    display: none;
+
+}</style>
