@@ -6,19 +6,19 @@
             <label for=""> Menu Name </label>
             <input type="text" class="form-control" id="title" name="title" value="{{ $course->title }}"
                 placeholder="" required>
-            <span id="error_name" class="has-error"></span>
+            <span id="error_title" class="has-error"></span>
         </div>
         <div class="form-group col-md-6 col-sm-12">
             <label for=""> Course Name * </label>
             <input type="text" class="form-control" id="course_name" name="course_name" value="{{ $course->course_name }}" placeholder=""
                 required>
-            <span id="error_name" class="has-error"></span>
+            <span id="error_course_name" class="has-error"></span>
         </div>
         <div class="form-group col-md-6 col-sm-12">
             <label for=""> course price </label>
             <input type="text" class="form-control" id="price" name="price" value="{{ $course->price }}"
                 placeholder="" required>
-            <span id="error_name" class="has-error"></span>
+            <span id="error_price" class="has-error"></span>
         </div>
         <div class="form-group col-md-6 col-sm-12">
             <label for="">Course Duration * </label>
@@ -33,7 +33,7 @@
                     </select>
                 </div>
             </div>
-            <span id="error_name" class="has-error"></span>
+            <span id="error_duration" class="has-error"></span>
         </div>
        
         <div class="form-group col-md-6 col-sm-12">
@@ -114,6 +114,7 @@
                             $('#myModal').modal('hide'); // hide bootstrap modal
 
                         } else if (data.type === 'error') {
+                            console.log('error======>', data.type)
                             if (data.errors) {
                                 $.each(data.errors, function(key, val) {
                                     $('#error_' + key).html(val);

@@ -64,8 +64,8 @@ class CourseController extends Controller
         if ($request->ajax()) {
             // Setup the validator
             $rules = [
-              'title' => 'required',
-              'course_name' => 'required',
+              'title' => 'required|unique:courses',
+              'course_name' => 'required|unique:courses',
               'price' => 'required',
               'duration' => 'required',
               'description' => 'required',
@@ -133,70 +133,65 @@ class CourseController extends Controller
          }
 
     }
+   public function update(UpdateCourseRequest $request, Course $course)
+   {
+      if ($request->ajax()) {
+         $rules = [
+               'title' => 'required|unique:courses,title,' . $course->id,
+               'course_name' => 'required|unique:courses,course_name,' . $course->id,
+               'price' => 'required',
+               'duration' => 'required',
+               'description' => 'required',
+               'duration_type' => 'required',
+               'image' => 'image|max:2024|mimes:jpeg,jpg,png'
+         ];
 
-    public function update(UpdateCourseRequest $request, Course $course)
-    {
-        if ($request->ajax()) {
-
-            $rules = [
-              'title' => 'required',
-              'course_name' => 'required',
-              'price' => 'required',
-              'duration' => 'required',
-              'description' => 'required',
-              'duration_type' => 'required',
-              'image' => 'image|max:2024|mimes:jpeg,jpg,png'
-            ];
-            [
-               'title.required' => 'Please enter menu',
-            ];
-
-            $validator = Validator::make($request->all(), $rules);
-            if ($validator->fails()) {
+         $validator = Validator::make($request->all(), $rules);
+         if ($validator->fails()) {
                return response()->json([
-                 'type' => 'error',
-                 'errors' => $validator->getMessageBag()->toArray()
+                  'type' => 'error',
+                  'errors' => $validator->getMessageBag()->toArray()
                ]);
-            } else {
-
-                $data = $request->all();
-                // image  start
-                if ($request->hasFile('image')) {
-                    if ($request->file('image')->isValid()) {
-                        if($course->image) {
+         } else {
+               $data = $request->all();
+               
+               // Image handling start
+               if ($request->hasFile('image')) {
+                  if ($request->file('image')->isValid()) {
+                     // Check if file exists before deleting
+                     if ($course->image && file_exists(public_path($course->image))) {
                            unlink(public_path($course->image));
-                        }
-                       $destinationPath = public_path('backend/media/course/');
-                       $extension = $request->file('image')->getClientOriginalExtension();
-                       $fileName = time() . '.' . $extension;
-                       $file_path = 'backend/media/course/' . $fileName;
-                       $request->file('image')->move($destinationPath, $fileName);
-                       $data['image'] = $file_path;
-                    } else {
-                       return response()->json([
-                         'type' => 'error',
-                         'message' => "<div class='alert alert-warning'>Please! File is not valid</div>"
-                       ]);
-                    }
-                 }
-                // image end
+                     }
+                     
+                     $destinationPath = public_path('backend/media/course/');
+                     $extension = $request->file('image')->getClientOriginalExtension();
+                     $fileName = time() . '.' . $extension;
+                     $file_path = 'backend/media/course/' . $fileName;
+                     $request->file('image')->move($destinationPath, $fileName);
+                     $data['image'] = $file_path;
+                  } else {
+                     return response()->json([
+                           'type' => 'error',
+                           'message' => "<div class='alert alert-warning'>Please! File is not valid</div>"
+                     ]);
+                  }
+               }
+               // Image handling end
 
                DB::beginTransaction();
                try {
                   $course->update($data);
                   DB::commit();
                   return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
-
                } catch (\Exception $e) {
                   DB::rollback();
                   return response()->json(['type' => 'error', 'message' => $e->getMessage()]);
                }
-
-            }
-         } else {
-            return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
          }
-    }
+      } else {
+         return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
+      }
+   }
 
     public function show(Course $course)
     {

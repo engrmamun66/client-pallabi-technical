@@ -8,21 +8,21 @@
             <label for=""> Menu Name * </label>
             <input type="text" class="form-control" id="title" name="title" value="" placeholder=""
                 required>
-            <span id="error_name" class="has-error"></span>
+            <span id="error_title" class="has-error"></span>
         </div>
 
         <div class="form-group col-md-6 col-sm-12">
             <label for=""> Course Name * </label>
             <input type="text" class="form-control" id="course_name" name="course_name" value="" placeholder=""
                 required>
-            <span id="error_name" class="has-error"></span>
+            <span id="error_course_name" class="has-error"></span>
         </div>
 
         <div class="form-group col-md-6 col-sm-12">
             <label for=""> Price * </label>
             <input type="text" class="form-control" id="price" name="price" value="" placeholder=""
                 required>
-            <span id="error_name" class="has-error"></span>
+            <span id="error_price" class="has-error"></span>
         </div>
         <div class="form-group col-md-6 col-sm-12">
             <label for=""> Duration * </label>
@@ -37,7 +37,7 @@
                     </select>
                 </div>
             </div>
-            <span id="error_name" class="has-error"></span>
+            <span id="error_duration" class="has-error"></span>
         </div>
         <div class="form-group col-md-12 col-sm-12">
             <label for=""> Description </label>
