@@ -1,0 +1,113 @@
+
+<form id='create' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation"
+novalidate>
+    <div class="form-row">
+        <div id="status"></div>
+        <div class="form-group col-md-6 col-sm-6">
+            <label for="">Teacher Name </label>
+            <input type="text" class="form-control" id="name" name="name" value=""
+                   placeholder="teacher name" required>
+            <span id="error_name" class="has-error"></span>
+        </div>
+        <div class="form-group col-md-6 col-sm-6">
+            <label for="">Teacher Email </label>
+            <input type="email" class="form-control" id="email" name="email" value=""
+                   placeholder="teacher email" required>
+            <span id="error_name" class="has-error"></span>
+        </div>
+        <div class="form-group col-md-6 col-sm-6">
+            <label for="">Address</label>
+            <input type="text" class="form-control" id="address" name="address" value=""
+                   placeholder="Address">
+            <span id="error_name" class="has-error"></span>
+        </div>
+        <div class="form-group col-md-6 col-sm-6">
+            <label for="">Mobile</label>
+            <input type="number" class="form-control" id="mobile" name="mobile" value=""
+                   placeholder="01xxxxx" required>
+            <span id="error_name" class="has-error"></span>
+        </div>
+        <div class="form-group col-md-6 col-sm-6">
+            <label for="">Password</label>
+            {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control','required')) !!}
+            <span id="error_password" class="has-error"></span>
+            <span id="error_name" class="has-error"></span>
+        </div>
+        <div class="form-group col-md-6 col-sm-6">
+            <label for="">Confirm Password</label>
+            {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control','required')) !!}
+            <span id="error_confirm-password" class="has-error"></span>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-success"><span class="fa fa-save fa-fw"></span> Save</button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</form>
+
+
+<script>
+    $(document).ready(function () {
+        $('#loader').hide();
+        $('#create').validate({// <- attach '.validate()' to your form
+            // Rules for form validation
+            rules: {
+                name: {
+                    required: true
+                }
+            },
+            // Messages for form validation
+            messages: {
+                name: {
+                    required: 'Enter Name'
+                }
+            },
+            submitHandler: function (form) {
+
+                var myData = new FormData($("#create")[0]);
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                myData.append('_token', CSRF_TOKEN);
+
+                $.ajax({
+                    url: 'teachers',
+                    type: 'POST',
+                    data: myData,
+                    dataType: 'json',
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function () {
+                        $('#loader').show();
+                        $("#submit").prop('disabled', true); // disable button
+                    },
+                    success: function (data) {
+
+                        if (data.type === 'success') {
+                            reload_table();
+                            notify_view(data.type, data.message);
+                            $('#loader').hide();
+                            $("#submit").prop('disabled', false); // disable button
+                            $("html, body").animate({scrollTop: 0}, "slow");
+                            $('#myModal').modal('hide'); // hide bootstrap modal
+
+                        } else if (data.type === 'error') {
+                            if (data.errors) {
+                                $.each(data.errors, function (key, val) {
+                                    $('#error_' + key).html(val);
+                                });
+                            }
+                            notify_view(data.type, data.message);
+                            $('#loader').hide();
+                            $("#submit").prop('disabled', false); // disable button
+
+                        }
+
+                    }
+                });
+            }
+            // <- end 'submitHandler' callback
+        });                    // <- end '.validate()'
+
+    });
+</script>
