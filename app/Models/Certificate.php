@@ -23,7 +23,10 @@ class Certificate extends Model
         'grade',
         'recommendation',
         'is_old',
+        'certificate_format',
+        'version_history',
         'is_download',
+
     ];
     public function course()
     {

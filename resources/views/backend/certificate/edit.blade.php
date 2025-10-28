@@ -18,9 +18,7 @@
             <div class="card-header">Update Certificate</div>
 
             <div class="card-body">
-                <form action="">
                     <certificate-component :batches="{{ $batches }}" :certificate="{{ $certificate }}"></certificate-component>
-                </form>
             </div>
         </div>
     </div>
