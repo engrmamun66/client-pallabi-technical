@@ -14,7 +14,7 @@ class CertificateController extends Controller
         $certificate = null;
 
         if(request()->has('certificate_number')) {
-             $certificate = Certificate::with(['course', 'student', 'batch'])->where('type', request()->input('type'))->where('certificate_number', request()->input('certificate_number'))->first();
+             $certificate = Certificate::with(['course', 'student', 'batch'])->where('certificate_number', request()->input('certificate_number'))->first();
         }
         return view('frontend.pages.certificate', compact('certificate'));
     }

@@ -16,13 +16,13 @@
                 <div class="col-12 col-lg-12">
                     <div class="contact-form">
                         <form action="{{ route('certificate.page') }}" class="row conact-form">
-                            <div class="col-md-6 col-12">
+                            <div class="col-md-12 col-12">
                                 <div class="single-personal-info">
                                     <label for="fname">Enter Certificate Number</label>
                                     <input type="text" id="certificate_number" value="{{ request('certificate_number') }}" name="certificate_number" placeholder="Enter Certificate Number" required >
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
+                            <!-- <div class="col-md-6 col-12">
                                 <div class="single-personal-info">
                                     <label for="fname">Select Certificate Type</label>
                                     <div class="form-check">
@@ -39,7 +39,7 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-12 col-12 text-center">
                                 <button type="submit" class="theme-btn">Search <i class="fas fa-arrow-right"></i></button>
                             </div>
@@ -74,6 +74,7 @@
                     <div class="row pb-0">
                         <div class="col-12 mb-20" id="imageContainer">
                             <div class="container certificate-wrapper position-relative">
+                                <img src="{{ asset('assets/images/certficate_header.jpg') }}" />
                                 <div class="header">
                                     <img src="{{ asset('assets/images/pallabi.jpg') }}" class="logo" alt="logo" />
                                     <div>
@@ -205,6 +206,7 @@
                                     </tr>
                                 </table>
                                 @endif
+                                <img src="{{ asset('assets/images/certificate_footer.jpg') }}" />
                             </div>
 
                             @if ($certificate->type == 'regular')
