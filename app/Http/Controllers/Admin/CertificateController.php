@@ -66,7 +66,8 @@ class CertificateController extends Controller
         ->addColumn('action', function ($certificates) use ($request)  {
            $html = '<div class="btn-group">';
         //    $html .= '<a data-toggle="tooltip" '  . '  id="' . $certificates->id . '" class="btn btn-xs btn-primary mr-1 view" title="View" style="color:white"><i class="fa fa-eye"></i> </a>';
-           if(!$certificates->is_download || $request->show_button){
+        //    if(!$certificates->is_download || $request->show_button){
+           if(!$certificates->is_download || true){
             $html .= '<a data-toggle="tooltip" '  . '  id="' . $certificates->id . '" class="btn btn-xs btn-info mr-1" href="' . route('admin.certificates.edit', $certificates->id) . '" title="Edit" style="color:white"><i class="fa fa-edit"></i> </a>';
             $html .= '<a data-toggle="tooltip" '  . ' id="' . $certificates->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete" style="color:white"><i class="fa fa-trash"></i> </a>';
            }
