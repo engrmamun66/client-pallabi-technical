@@ -41,13 +41,15 @@ class CertificateController extends Controller
         } 
         // If no image but PDF exists, show PDF in iframe
         elseif ($certificates->pdf_path && Storage::disk('public')->exists($certificates->pdf_path)) {
-            $pdfUrl = asset('storage/' . $certificates->pdf_path);
+            // $pdfUrl = asset('storage/app/public/' . $certificates->pdf_path) . "#toolbar=0&navpanes=0&scrollbar=0&zoom=page-fit&view=Fit";
+            $pdfUrl = asset('storage/app/public/' . $certificates->pdf_path) . "#toolbar=0&navpanes=0&scrollbar=0&zoom=0.7&view=Fit";
+            
                 return "
-                    <iframe 
-                        src='http://pallabitechnical.test/storage/app/public/pdfs/68fee7eeec31b.pdf#toolbar=0&navpanes=0&scrollbar=0&zoom=page-fit&view=Fit'
+                    <iframe  
+                        src='${pdfUrl}'
                         width='60' 
                         height='82' 
-                        style='border: 1px solid #ddd; border-radius: 4px; transform: scale(0.8); transform-origin: 0 0;'
+                        style='width:90px; border: 1px solid #ddd; border-radius: 4px; transform: scale(0.6); transform-origin: 0 0;'
                         title='PDF Preview'
                     >
                     </iframe>
