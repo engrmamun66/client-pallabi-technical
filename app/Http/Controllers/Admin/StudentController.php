@@ -72,6 +72,7 @@ class StudentController extends Controller
             // Setup the validator
             $rules = [
               'name' => 'required',
+              'nid_or_passport' => 'nullable|unique:students',
               'email' => 'required|email|unique:users,email',
               'password' => 'required|same:confirm-password',
               'fathers_name' => 'required|string|max:255',
@@ -123,6 +124,7 @@ class StudentController extends Controller
                     $student = Student::create([
                         'user_id' => $user->id,
                         'name' => $request->name,
+                        'nid_or_passport' => $request->nid_or_passport,
                         'fathers_name' => $request->fathers_name,
                         'address' => $request->address,
                         'mobile' => $request->mobile,
@@ -164,6 +166,7 @@ class StudentController extends Controller
          // Setup the validator
          $rules = [
            'name' => 'required',
+           'nid_or_passport' => ['nullable','string', Rule::unique('students')->ignore($student->id),],
            'fathers_name' => 'required|string|max:255',
            'address' => 'required|string|max:255',
            'mobile' => ['required','digits:11', Rule::unique('students')->ignore($student->id),],
@@ -204,6 +207,7 @@ class StudentController extends Controller
                 // Create student-specific data
                  $student->update([
                      'name' => $request->name,
+                     'nid_or_passport' => $request->nid_or_passport,
                      'fathers_name' => $request->fathers_name,
                      'address' => $request->address,
                      'mobile' => $request->mobile,

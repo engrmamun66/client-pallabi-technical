@@ -22372,7 +22372,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     var imageInput = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(null);
     var pdfInput = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(null);
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)({
-      certificate_format: 'old',
+      certificate_format: 'new',
       // Default to old format
       batch_id: '',
       course_id: '',

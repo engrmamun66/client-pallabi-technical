@@ -151,7 +151,7 @@ const imageInput = ref(null);
 const pdfInput = ref(null);
 
 const form = ref({
-    certificate_format: 'old', // Default to old format
+    certificate_format: 'new', // Default to old format
     batch_id: '',
     course_id: '',
     student_id: '',

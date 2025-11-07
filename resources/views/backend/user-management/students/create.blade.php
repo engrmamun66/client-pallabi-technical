@@ -16,6 +16,12 @@ novalidate>
             <span id="error_name" class="has-error"></span>
         </div>
         <div class="form-group col-md-6 col-sm-6">
+            <label for="">Student NID/Passport </label>
+            <input type="text" class="form-control" id="nid_or_passport" name="nid_or_passport" value=""
+                   placeholder="student nid/passport" required>
+            <span id="error_name" class="has-error"></span>
+        </div>
+        <div class="form-group col-md-6 col-sm-6">
             <label for="">Father's Name </label>
             <input type="text" class="form-control" id="fathers_name" name="fathers_name" value=""
                    placeholder="Father name" required>
@@ -33,6 +39,19 @@ novalidate>
                    placeholder="+880xxxxx" required>
             <span id="error_name" class="has-error"></span>
         </div>
+        
+        <div class="form-group col-md-6 col-sm-6">
+            <label for="">Password</label>
+            {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control','required')) !!}
+            <span id="error_password" class="has-error"></span>
+            <span id="error_name" class="has-error"></span>
+        </div>
+        <div class="form-group col-md-6 col-sm-6">
+            <label for="">Confirm Password</label>
+            {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control','required')) !!}
+            <span id="error_confirm-password" class="has-error"></span>
+        </div>
+   
         <div class="col-md-6">
             <label for="image">Image (File must be jpg, jpeg, png)</label>
             <div class="input-group">
@@ -50,19 +69,8 @@ novalidate>
             </script>
             <span id="error_image" class="has-error"></span>
         </div>
-        <div class="form-group col-md-6 col-sm-6">
-            <label for="">Password</label>
-            {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control','required')) !!}
-            <span id="error_password" class="has-error"></span>
-            <span id="error_name" class="has-error"></span>
-        </div>
-        <div class="form-group col-md-6 col-sm-6">
-            <label for="">Confirm Password</label>
-            {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control','required')) !!}
-            <span id="error_confirm-password" class="has-error"></span>
-        </div>
         <div class="clearfix"></div>
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12 mt-3">
             <button type="submit" class="btn btn-success"><span class="fa fa-save fa-fw"></span> Save</button>
         </div>
         <div class="clearfix"></div>

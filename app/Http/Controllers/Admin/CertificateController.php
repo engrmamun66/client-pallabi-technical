@@ -29,10 +29,10 @@ class CertificateController extends Controller
         return view('backend.certificate.index');
     }
 
-    public function getAll()
+    public function getAll(Request $request)
    {
 
-      $certificates = Certificate::all();
+      $certificates = Certificate::all()->sortByDesc('id');
       return Datatables::of($certificates)
        ->addColumn('image', function ($certificates) {
         // Check if image exists
@@ -63,10 +63,10 @@ class CertificateController extends Controller
         ->addColumn('course', function ($certificates) {
             return '<label class="badge badge-secondary">' . $certificates->course->title??'' . '</label>';
          })
-        ->addColumn('action', function ($certificates)  {
+        ->addColumn('action', function ($certificates) use ($request)  {
            $html = '<div class="btn-group">';
-           $html .= '<a data-toggle="tooltip" '  . '  id="' . $certificates->id . '" class="btn btn-xs btn-primary mr-1 view" title="View" style="color:white"><i class="fa fa-eye"></i> </a>';
-           if(!$certificates->is_download){
+        //    $html .= '<a data-toggle="tooltip" '  . '  id="' . $certificates->id . '" class="btn btn-xs btn-primary mr-1 view" title="View" style="color:white"><i class="fa fa-eye"></i> </a>';
+           if(!$certificates->is_download || $request->show_button){
             $html .= '<a data-toggle="tooltip" '  . '  id="' . $certificates->id . '" class="btn btn-xs btn-info mr-1" href="' . route('admin.certificates.edit', $certificates->id) . '" title="Edit" style="color:white"><i class="fa fa-edit"></i> </a>';
             $html .= '<a data-toggle="tooltip" '  . ' id="' . $certificates->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete" style="color:white"><i class="fa fa-trash"></i> </a>';
            }
@@ -319,14 +319,23 @@ class CertificateController extends Controller
 
                 // === PDF UPLOAD ===
                 if ($request->hasFile('pdf') && $request->file('pdf')->isValid()) {
-                    $pdf = $request->file('pdf');
-                    \Log::info('PDF upload debug', [
-                        'realPath' => $pdf->getRealPath(),
-                        'isValid' => $pdf->isValid(),
-                        'path' => $pdf->path(),
-                        'exists' => file_exists($pdf->getRealPath() ?? ''),
-                    ]);
-                    $data['pdf_path'] = $this->uploadFile($pdf, 'pdfs');
+                //     $pdf = $request->file('pdf');
+                //     \Log::info('PDF upload debug', [
+                //         'realPath' => $pdf->getRealPath(),
+                //         'isValid' => $pdf->isValid(),
+                //         'path' => $pdf->path(),
+                //         'exists' => file_exists($pdf->getRealPath() ?? ''),
+                //     ]);
+                // dd( $pdf);
+
+
+                    // $data['pdf_path'] = $this->uploadFile($pdf, 'pdfs');
+                    $file = $request->file('pdf');
+                    // Define the file path
+                    $filePath = $file->store('pdfs', 'public'); // Store in storage/app/public/pdfs
+                    // Save file path in the database
+                    $data['pdf_path'] = $filePath;
+                    $data['is_old'] = 1;
                 }
 
 
@@ -527,20 +536,20 @@ class CertificateController extends Controller
             $fullPath = $path . $fileName;
 
             // Load your existing Blade template with the certificate data
-            if($certificate->type == ''){
+            if($certificate->type == 'regular'){
                 $pdf = Pdf::loadView('regular-certificate', [
                     'certificate' => $certificate
-                ]);
+                ])->setPaper([0, 0, 750, 850], 'landscape');
 
             }else{
-                $pdf = Pdf::loadView('regular-certificate', [
+                $pdf = Pdf::loadView('test-certificate', [
                     'certificate' => $certificate
-                ]);
+                ])->setPaper([0, 0, 800, 970], 'portrait');
             }
           
 
-            // Set paper options
-            $pdf->setPaper('A4', 'portrait');
+            // // Set paper options
+            // $pdf->setPaper('A4', 'portrait');
             
             // Save the PDF to file
             $pdf->save($fullPath);

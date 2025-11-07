@@ -10,7 +10,12 @@ novalidate>
                    placeholder="student name" required>
             <span id="error_name" class="has-error"></span>
         </div>
-        
+        <div class="form-group col-md-6 col-sm-6">
+            <label for="">Student NID/Pasword </label>
+            <input type="text" class="form-control" id="nid_or_passport" name="nid_or_passport" value="{{ $student->nid_or_passport }}"
+                   placeholder="student nid/password" required>
+            <span id="error_name" class="has-error"></span>
+        </div>
         <div class="form-group col-md-6 col-sm-6">
             <label for="">Father's Name </label>
             <input type="text" class="form-control" id="fathers_name" name="fathers_name" value="{{ $student->fathers_name }}"

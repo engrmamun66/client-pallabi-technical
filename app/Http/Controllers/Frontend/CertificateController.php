@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Certificate;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class CertificateController extends Controller
 {
@@ -14,7 +15,7 @@ class CertificateController extends Controller
         $certificate = null;
 
         if(request()->has('certificate_number')) {
-             $certificate = Certificate::with(['course', 'student', 'batch'])->where('certificate_number', request()->input('certificate_number'))->first();
+            $certificate = Certificate::with(['course', 'student', 'batch'])->where('certificate_number', request()->input('certificate_number'))->first();
         }
         return view('frontend.pages.certificate', compact('certificate'));
     }
@@ -46,7 +47,9 @@ class CertificateController extends Controller
             'certificate' => $certificate
         ];
         $pdf = Pdf::loadView('regular-certificate', $data)->setPaper([0, 0, 750, 850], 'landscape');
-        return $pdf->download('certificate.pdf');
+        
+        $filename = Carbon::now()->format('Y-m-d_H-i-s') . '_certificate.pdf';
+        return $pdf->download($filename);
     }
 
     public function downloadTestCertificate(string $id) {
@@ -55,7 +58,9 @@ class CertificateController extends Controller
         $data = [
             'certificate' => $certificate
         ];
-        $pdf = Pdf::loadView('test-certificate', $data)->setPaper([0, 0, 600, 750], 'portrait');
-        return $pdf->download('certificate.pdf');
+        $pdf = Pdf::loadView('test-certificate', $data)->setPaper([0, 0, 800, 970], 'portrait');
+        
+        $filename = Carbon::now()->format('Y-m-d_H-i-s') . '_certificate.pdf';
+        return $pdf->download($filename);
     }
 }

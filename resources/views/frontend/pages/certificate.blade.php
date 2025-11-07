@@ -63,7 +63,7 @@
                     <div class="row pb-0">
                         <div class="col-12 text-center mb-20" id="imageContainer">
                             <img src="{{ 'public/'. $certificate->image }}" alt="Certificate Image" style="margin-top: -25%"><br>
-                            <a href="{{ 'public/storage/'. $certificate->pdf_path }}" download class="btn ms-auto btn-primary mt-3">Download Certificate</a>
+                            <a href="{{ asset('storage/app/public/' . $certificate->pdf_path) }}" download class="btn ms-auto btn-primary mt-3">Download Certificate</a>
                         </div>
                     </div>
                 </div>
@@ -73,151 +73,57 @@
                 <div class="container">
                     <div class="row pb-0">
                         <div class="col-12 mb-20" id="imageContainer">
-                            <div class="container certificate-wrapper position-relative">
-                                <img src="{{ asset('assets/images/certficate_header.jpg') }}" />
-                                <div class="header">
-                                    <img src="{{ asset('assets/images/pallabi.jpg') }}" class="logo" alt="logo" />
-                                    <div>
-                                        <div class="title-text">PALLABI TECHNICAL INSTITUTE</div>
-                                        <div class="subtitle">www.pallabitechnical.org</div>
-                                    </div>
-                                </div>
-                    
-                                <div class="text-center">
-                                    <div class="badge">Trade Course Certificate</div>
-                                </div>
-                    
-                                <!-- Photo -->
-                                <div class="photo">
-                                    <img src="{{ 'public/' . $certificate?->student?->image }}" alt="student photo" />
-                                </div>
-                    
-                                <!-- Background logo watermark -->
-                                <div class="bg-logo">
-                                    <img src="{{ asset('assets/images/pallabi.jpg') }}" alt="logo watermark" />
-                                </div>
-                    
-                                <!-- Certificate Body -->
-                                @if ($certificate?->type == 'regular')
-                                    <div class="details mt-4">
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;"><strong>CR No</strong></span>
-                                            <span>: {{ $certificate?->certificate_number }}</span>
-                                        </p>
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;">Certified that</span>
-                                            <span>: <strong>{{ $certificate?->student?->name }}</strong></span>
-                                        </p>
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;">Son/Daughter of</span>
-                                            <span>: <strong>{{ $certificate?->student?->fathers_name }}</strong></span>
-                                        </p>
-                                        <p style="margin-bottom: 10px;">
-                                            <span>He/She successfully completed the trade course on</span><br>
-                                            <span style="display: inline-block; width: 200px;"></span><span style="margin-top: 40px"><strong>{{ $certificate?->course->course_name }} {{ $certificate?->mark_obtained }} Position</strong></span>
-                                        </p>
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;">Duration of Course</span>
-                                            <span>: <strong>{{ $certificate?->course->duration }} {{ ucFirst($certificate?->course->duration_type) }}</strong></span>
-                                        </p>
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;">With Contact Hour</span>
-                                            <span>: <strong>{{ $certificate?->contact_hour }}</strong></span>
-                                        </p>
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;"><strong>Issue Date</strong></span>
-                                            <span>: {{ Carbon\Carbon::parse($certificate?->issue_date)?->format('d/m/Y') }}</span>
-                                        </p>
-                                    </div>
-                                @else
-                                    <div class="details mt-4">
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;"><strong>TR No</strong></span>
-                                            <span>: {{ $certificate?->certificate_number }}</span>
-                                        </p>
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;">Name</span>
-                                            <span>: <strong>{{ $certificate?->student?->name }}</strong></span>
-                                        </p>
-                                        <p style="margin-bottom: 20px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;">Son/Daughter of</span>
-                                            <span>: <strong>{{ $certificate?->student?->fathers_name }}</strong></span>
-                                        </p>
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;">Test Of</span>
-                                            <span style="margin-bottom: 40px">: <strong>{{ $certificate?->course->course_name }}</strong></span>
-                                        </p>
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;">Date Of Test</span>
-                                            <span>: <strong>{{ $certificate?->test_date }} Month</strong></span>
-                                        </p>
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;">Marks Obtained</span>
-                                            <span>: <strong>{{ $certificate?->mark_obtained }}%</strong></span>
-                                        </p>
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;">He/She Deserved Grade</span>
-                                            <span>: <strong>{{ $certificate?->grade }}</strong></span>
-                                        </p>
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;">Recommendation</span>
-                                            <span>: <strong>{{ $certificate?->recommendation }}</strong></span>
-                                        </p>
-                                        <p style="margin-bottom: 10px; display: flex;">
-                                            <span style="display: inline-block; width: 200px;"><strong>Issue Date</strong></span>
-                                            <span>: {{  Carbon\Carbon::parse($certificate?->issue_date)?->format('d/m/Y') }}</span>
-                                        </p>
-                                    </div>
-                                @endif
-                    
-                                <!-- Signatures -->
-                                <div class="d-flex justify-content-between" style="width: 100%; margin-top: 120px;">
-                                    <div style="text-align: start;">
-                                        <img src="{{ asset('assets/images/training.jpg') }}" alt="signature" style="height: 40px; margin-left: 25px" />
-                                        <div>Training Manager</div>
-                                    </div>
-                                    <div style="text-align: right;">
-                                        <img src="{{ asset('assets/images/director.png') }}" alt="signature" style="height: 40px;" />
-                                        <div style="margin-right: 15px !important">Director</div>
-                                    </div>
-                                </div>
-                    
-                                <div class="footer">
-                                    This Certificate is awarded to him this day
-                                </div>
-                    
-                                @if ($certificate?->type == 'test')
-                                <table class="grade-table mt-4">
-                                    <tr>
-                                        <th>Marks Range</th>
-                                        <td>90%–100%</td>
-                                        <td>80%–89%</td>
-                                        <td>70%–79%</td>
-                                        <td>60%–69%</td>
-                                        <td>Below 60%</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Grade</th>
-                                        <td>A+</td>
-                                        <td>A</td>
-                                        <td>B+</td>
-                                        <td>B</td>
-                                        <td>C (Unfit)</td>
-                                    </tr>
-                                </table>
-                                @endif
-                                <img src="{{ asset('assets/images/certificate_footer.jpg') }}" />
-                            </div>
-
                             @if ($certificate->type == 'regular')
-                                <div class="col-12 text-center">
-                                    <a href="{{ route('download.regularCertificate', $certificate->id) }}" class="btn ms-auto btn-primary mt-3">Download Certificate</a>
+                                <!-- Regular Certificate Design -->
+                                <div class="certificate-container">
+                                    <div class="field profile-image-area" style="background-image: url('{{ $certificate?->student?->image ? asset('public/' . $certificate?->student?->image) : '/public/assets/images/certificate/profile.jpg' }}')"></div>
+                                    <div class="field cr-no uppercase">{{ $certificate?->certificate_number }}</div>
+                                    <div class="field certified-that uppercase">{{ $certificate?->student?->name }}</div>
+                                    <div class="field son-of uppercase">{{ $certificate?->student?->fathers_name }}</div>
+                                    <div class="field duration">{{ $certificate?->course->duration }} {{ ucFirst($certificate?->course->duration_type) }}</div>
+                                    <div class="field contact-hour">{{ $certificate?->contact_hour }} Hours</div>
+                                    <div class="field issue-date">{{ Carbon\Carbon::parse($certificate?->issue_date)?->format('d/m/Y') }}</div>
+                                    <div class="field course-text">
+                                        <b>{{ $certificate?->course->course_name }}</b>.
+                                    </div>
+                                    <div class="field training-manager">
+                                        <img src="{{ asset('assets/images/training.jpg') }}" alt="Training Manager Signature">
+                                    </div>
+                                    <div class="field director">
+                                        <img src="{{ asset('assets/images/director.jpg') }}" alt="Director Signature">
+                                    </div>
                                 </div>
                             @else
-                                <div class="col-12 text-center">
-                                    <a href="{{ route('download.testCertificate', $certificate->id) }}" class="btn ms-auto btn-primary mt-3">Download Certificate</a>
+                                <!-- Test Certificate Design -->
+                                <div class="certificate-container test-certificate">
+                                    <div class="field profile-image-area" style="background-image: url('{{ $certificate?->student?->image ? asset('public/' . $certificate?->student?->image) : '/public/assets/images/certificate/profile.jpg' }}')"></div>
+                                    <div class="field tr-no uppercase">{{ $certificate?->certificate_number }}</div>
+                                    <div class="field name uppercase">{{ $certificate?->student?->name }}</div>
+                                    <div class="field father-name uppercase">{{ $certificate?->student?->fathers_name }}</div>
+                                    <div class="field nid-number uppercase">{{ $certificate?->student?->nid ?? 'N/A' }}</div>
+                                    <div class="field test-of">{{ $certificate?->course->course_name }}</div>
+                                    <div class="field date-of-test">{{ $certificate?->test_date }}</div>
+                                    <div class="field marks-obtained">{{ $certificate?->mark_obtained }}%</div>
+                                    <div class="field deserved-grage uppercase">{{ $certificate?->grade }}</div>
+                                    <div class="field recommendation uppercase">{{ $certificate?->recommendation }}</div>
+                                    <div class="field training-manager">
+                                        <img src="{{ asset('assets/images/training.jpg') }}" alt="Training Manager Signature">
+                                    </div>
+                                    <div class="field director">
+                                        <img src="{{ asset('assets/images/director.jpg') }}" alt="Director Signature">
+                                    </div>
+                                    <div class="field issue-date">{{ Carbon\Carbon::parse($certificate?->issue_date)?->format('d/m/Y') }}</div>
                                 </div>
                             @endif
+
+                            <!-- Download Button -->
+                            <div class="col-12 text-center mt-4">
+                                @if ($certificate->type == 'regular')
+                                    <a href="{{ route('download.regularCertificate', $certificate->id) }}" class="btn ms-auto btn-primary mt-3">Download Certificate</a>
+                                @else
+                                    <a href="{{ route('download.testCertificate', $certificate->id) }}" class="btn ms-auto btn-primary mt-3">Download Certificate</a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -225,186 +131,217 @@
         @endif
     @endif
 
-
 </div><!-- content-area -->
 @include('frontend.layouts.footer-banner')
-{{-- <script>
-    document.getElementById('searchForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        let certificateNumber = document.getElementById('certificate_number').value;
-        const selectedRadio = document.querySelector('input[name="type"]:checked');
-        const certificateType = selectedRadio ? selectedRadio.value : null;
-
-          // Construct the query string
-          const queryString = new URLSearchParams({
-            certificate_number: certificateNumber,
-            type: certificateType
-        }).toString();
-
-        fetch(`/certificate/search?${queryString}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.image_path) {
-                    document.getElementById('imageContainer').innerHTML = `<img src="${data.image_path}" alt="Certificate Image" style="margin-top: -25%"><br>
-                    <a href="${data.pdf_path}" download class="btn btn-primary mt-3">Download Certificate</a>`;
-                } else {
-                    document.getElementById('imageContainer').innerHTML = 'Certificate not found.';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    });
-</script> --}}
 
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Black+Ops+One&display=swap");
 
-    .certificate-section {
-        margin: 0;
-        max-width: 1200px;
-        margin-right: 200px !important;
-        padding: 2rem;
-        font-family: "Georgia", serif;
-        background: #fff;
-    }
-
-    .certificate-wrapper {
+    /* Common Certificate Styles */
+    .certificate-container {
         position: relative;
-        max-width: 1000px;
-        margin: auto;
-        padding: 3rem;
-        background: white;
-        border: 15px solid;
-        border-image: repeating-linear-gradient(
-                45deg,
-                black 0px,
-                black 2px,
-                white 2px,
-                white 4px
-            )
-            15;
+        font-family: sans-serif;
+        margin: 0 auto;
     }
 
-    .certificate {
-        border: 10px double #1a237e;
-        padding: 30px;
-        position: relative;
-        background: white;
-    }
-
-    .header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    .logo {
-        height: 80px;
-        margin-right: 20px;
-    }
-
-    .title-text {
-        font-family: "Black Ops One", sans-serif;
-        font-size: 1.8rem;
-        color: #0d1b70;
-        letter-spacing: 1px;
-    }
-
-    .subtitle {
-        text-align: center;
+    .field {
+        position: absolute;
+        font-size: 16px;
+        color: #000;
         font-weight: bold;
-        color: #1a237e;
-        margin-top: 5px;
+    }
+    .uppercase {
+        text-transform: uppercase;
+    }
+    /* Regular Certificate Styles */
+    .certificate-container:not(.test-certificate) {
+        width: 1011px;
+        height: 768px;
+        background: url('/public/assets/images/certificate/certificate-new.png') no-repeat center;
+        background-size: cover;
     }
 
-    .badge {
-        background-color: #0d1b70;
-        color: white;
-        font-family: "Great Vibes", cursive;
-        font-size: 3rem;
-        padding: 8px 25px;
-        border-radius: 50px;
-        display: inline-block;
-        margin-left: 100px !important;
-        margin: 20px auto;
+    .certificate-container:not(.test-certificate) .field.profile-image-area {
+        top: 215px;
+        left: 824px;
+        width: 108px;
+        height: 126px;
+        background-color: #00000054;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
-    .details {
-        font-style: italic;
-        font-size: 1.3rem;
-        margin-top: 30px;
+    .certificate-container:not(.test-certificate) .field.cr-no {
+        top: 322px;
+        left: 320px;
     }
 
-    .details strong {
-        font-style: normal;
+    .certificate-container:not(.test-certificate) .field.certified-that {
+        top: 361px;
+        left: 320px;
+        width: 600px;
     }
 
-    .signatures {
-        margin-top: 60px;
-        position: relative;
-        width: 100%;
+    .certificate-container:not(.test-certificate) .field.son-of {
+        top: 394px;
+        left: 320px;
+        width: 600px;
     }
 
-    .signature {
-        text-align: center;
+    .certificate-container:not(.test-certificate) .field.duration {
+        top: 427px;
+        left: 320px;
+        width: 600px;
     }
 
-    .signature:last-child {
-        position: absolute;
-        right: 100px;
+    .certificate-container:not(.test-certificate) .field.contact-hour {
+        top: 459px;
+        left: 320px;
+        width: 600px;
     }
 
-    .signature img {
-        height: 40px;
+    .certificate-container:not(.test-certificate) .field.issue-date {
+        top: 489px;
+        left: 320px;
+        width: 200px;
     }
 
-    .grade-table {
-        width: 100%;
-        margin-top: 40px;
-        border: 1px solid #000;
-        border-collapse: collapse;
-    }
-    .grade-table th,
-    .grade-table td {
-        border: 1px solid #000;
-        padding: 6px 10px;
-        text-align: center;
-        font-size: 14px;
+    .certificate-container:not(.test-certificate) .field.course-text {
+        top: 551px;
+        left: 502px;
     }
 
-    .photo {
-        position: absolute;
-        top: 140px;
-        right: 50px;
-        border: 2px solid #000;
+    .certificate-container:not(.test-certificate) .field.training-manager {
+        top: 630px;
+        left: 120px;
     }
 
-    .photo img {
-        height: 100px;
-        width: 90px;
-        object-fit: cover;
+    .certificate-container:not(.test-certificate) .field.training-manager img {
+        mix-blend-mode: multiply;
+        width: 53px;
     }
 
-    .footer {
-        text-align: center;
-        font-weight: bold;
-        margin-top: 30px;
+    .certificate-container:not(.test-certificate) .field.director {
+        top: 611px;
+        left: 818px;
     }
 
-    .bg-logo {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        opacity: 0.08;
-        z-index: 0;
+    .certificate-container:not(.test-certificate) .field.director img {
+        mix-blend-mode: multiply;
     }
 
-    .bg-logo img {
-        max-width: 100%;
+    /* Test Certificate Styles */
+    .certificate-container.test-certificate {
+        width: 850px;
+        height: 1090px;
+        background: url('/public/assets/images/certificate/marksheet-new.png') no-repeat center;
+        background-size: cover;
+    }
+
+    .certificate-container.test-certificate .field.profile-image-area {
+        top: 319px;
+        left: 658px;
+        width: 111px;
+        height: 131px;
+        background-color: #00000054;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .certificate-container.test-certificate .field.tr-no {
+        top: 358px;
+        left: 320px;
+    }
+
+    .certificate-container.test-certificate .field.name {
+        top: 442px;
+        left: 320px;
+    }
+
+    .certificate-container.test-certificate .field.father-name {
+        top: 481px;
+        left: 320px;
+    }
+
+    .certificate-container.test-certificate .field.nid-number {
+        top: 519px;
+        left: 320px;
+    }
+
+    .certificate-container.test-certificate .field.test-of {
+        top: 557px;
+        left: 320px;
+    }
+
+    .certificate-container.test-certificate .field.date-of-test {
+        top: 596px;
+        left: 320px;
+    }
+
+    .certificate-container.test-certificate .field.marks-obtained {
+        top: 634px;
+        left: 320px;
+    }
+
+    .certificate-container.test-certificate .field.deserved-grage {
+        top: 673px;
+        left: 320px;
+    }
+
+    .certificate-container.test-certificate .field.recommendation {
+        top: 709px;
+        left: 320px;
+    }
+
+    .certificate-container.test-certificate .field.training-manager {
+        top: 790px;
+        left: 131px;
+    }
+
+    .certificate-container.test-certificate .field.training-manager img {
+        mix-blend-mode: multiply;
+        width: 53px;
+    }
+
+    .certificate-container.test-certificate .field.director {
+        top: 770px;
+        left: 658px;
+    }
+
+    .certificate-container.test-certificate .field.director img {
+        mix-blend-mode: multiply;
+    }
+    
+    .certificate-container.test-certificate .field.issue-date {
+        top: 866px;
+        left: 220px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+        .certificate-container:not(.test-certificate) {
+            transform: scale(0.8);
+            transform-origin: top center;
+        }
+        
+        .certificate-container.test-certificate {
+            transform: scale(0.7);
+            transform-origin: top center;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .certificate-container:not(.test-certificate) {
+            transform: scale(0.6);
+            transform-origin: top center;
+        }
+        
+        .certificate-container.test-certificate {
+            transform: scale(0.5);
+            transform-origin: top center;
+        }
     }
 </style>
 @endsection
-
