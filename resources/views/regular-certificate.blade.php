@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certificate</title>
     <style>
-        @font-face {
+        /* @font-face {
             font-family: 'GreatVibes';
             font-weight: normal;
             font-style: normal;
@@ -19,7 +19,7 @@
             font-weight: normal;
             font-style: normal;
             src: url("{{ resource_path('fonts/BlackOpsOne-Regular.ttf') }}") format('truetype');
-        }
+        } */
 
         body {
             margin: 0;
@@ -104,8 +104,8 @@
 
         /* === Completion Text === */
         .field.course-text { 
-            top: 558px;
-            left: 502px;  
+            top: 556px;
+            left: 502px;   
         }
 
         /* === Signatures === */
@@ -154,7 +154,7 @@
         <div class="field issue-date">{{  Carbon\Carbon::parse($certificate?->issue_date)?->format('d/m/Y') }}</div>
 
         <div class="field course-text">
-            <b>{{ $certificate?->course->course_name }}</b>.
+            <b>{{ $certificate?->course->course_name }} <<<</b>
         </div>
 
         <div class="field training-manager">

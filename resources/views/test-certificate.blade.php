@@ -81,6 +81,7 @@
         .field.test-of {
             top: 615px;
             left: var(--fieldLeft);
+            font-family: sans-serif;
         }
         .field.date-of-test {
             top: 658px;

@@ -84,7 +84,7 @@
                                     <div class="field contact-hour">{{ $certificate?->contact_hour }} Hours</div>
                                     <div class="field issue-date">{{ Carbon\Carbon::parse($certificate?->issue_date)?->format('d/m/Y') }}</div>
                                     <div class="field course-text">
-                                        <b>{{ $certificate?->course->course_name }}</b>.
+                                        <b>{{ $certificate?->course->course_name }}</b>
                                     </div>
                                     <div class="field training-manager">
                                         <img src="{{ asset('assets/images/training.jpg') }}" alt="Training Manager Signature">
@@ -210,6 +210,7 @@
     .certificate-container:not(.test-certificate) .field.course-text {
         top: 551px;
         left: 502px;
+        font-family: sans-serif;
     }
 
     .certificate-container:not(.test-certificate) .field.training-manager {
@@ -273,6 +274,7 @@
     .certificate-container.test-certificate .field.test-of {
         top: 557px;
         left: 320px;
+        font-family: sans-serif;
     }
 
     .certificate-container.test-certificate .field.date-of-test {
