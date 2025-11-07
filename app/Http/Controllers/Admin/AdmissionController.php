@@ -127,7 +127,10 @@ class AdmissionController extends Controller
                 // image  start
                 if ($request->hasFile('image')) {
                     if ($request->file('image')->isValid()) {
-                        unlink(public_path($admission->image));
+                        // Check if file exists before deleting
+                        if ($admission->image && file_exists(public_path($admission->image))) {
+                            unlink(public_path($admission->image));
+                        }
                        $destinationPath = public_path('backend/media/setting/admission_section/');
                        $extension = $request->file('image')->getClientOriginalExtension();
                        $fileName = time() . '.' . $extension;

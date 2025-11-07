@@ -100,7 +100,7 @@
                                     <div class="field tr-no uppercase">{{ $certificate?->certificate_number }}</div>
                                     <div class="field name uppercase">{{ $certificate?->student?->name }}</div>
                                     <div class="field father-name uppercase">{{ $certificate?->student?->fathers_name }}</div>
-                                    <div class="field nid-number uppercase">{{ $certificate?->student?->nid ?? 'N/A' }}</div>
+                                    <div class="field nid-number uppercase">{{ $certificate?->student?->nid_or_passport ?? 'N/A' }}</div>
                                     <div class="field test-of">{{ $certificate?->course->course_name }}</div>
                                     <div class="field date-of-test">{{ $certificate?->test_date }}</div>
                                     <div class="field marks-obtained">{{ $certificate?->mark_obtained }}%</div>
