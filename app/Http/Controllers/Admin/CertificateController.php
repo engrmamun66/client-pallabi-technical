@@ -49,7 +49,7 @@ class CertificateController extends Controller
                         src='${pdfUrl}'
                         width='60' 
                         height='82' 
-                        style='width:90px; border: 1px solid #ddd; border-radius: 4px; transform: scale(0.6); transform-origin: 0 0;'
+                        style='width:90px; border: 1px solid #ddd; border-radius: 4px; transform: scale(0.8) translateY(17px); transform-origin: 0 0;pointer-events:none'
                         title='PDF Preview'
                     >
                     </iframe>
