@@ -6925,6 +6925,10 @@ header.stop .top-header {
   height: 370px;
   border-radius: 7px;
   position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  
 }
 .case-study-items .single-case-item .contents, .case-study-2 .single-case-item .contents {
   width: 90%;

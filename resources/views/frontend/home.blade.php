@@ -122,7 +122,7 @@
             </svg>
         </section>
 
-        <div class="client-brand-logo-wrap techex-landing-page  section-padding-3 bg-white">
+        <!-- <div class="client-brand-logo-wrap techex-landing-page  section-padding-3 bg-white">
             <div class="container">
                 <div class="brand-carousel-active d-flex justify-content-between owl-carousel">
                     @php
@@ -136,10 +136,10 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
-          <section class="case-study-carousel-wrapper style-2">
+          <section class="case-study-carousel-wrapper style-2 pt-100">
             <div class="container">
                 <div class="row mb-70">
                     <div class="col-lg-6 col-12">
