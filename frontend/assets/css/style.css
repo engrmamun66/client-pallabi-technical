@@ -12592,3 +12592,7 @@ header.header-5 .main-header-wraper .header-search.show .search-box .form-group:
 .contact_widget_2 .contact-us .single-contact-info .contact-info p {
   margin-top: -5px;
 }
+
+#imageContainer{
+  overflow-x: auto;
+}

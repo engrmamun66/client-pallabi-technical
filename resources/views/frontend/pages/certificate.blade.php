@@ -336,8 +336,8 @@
 
     @media (max-width: 768px) {
         .certificate-container:not(.test-certificate) {
-            transform: scale(0.6);
-            transform-origin: top center;
+            zoom: 0.43;
+            transform-origin: top left;
         }
         
         .certificate-container.test-certificate {
