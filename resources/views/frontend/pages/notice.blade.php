@@ -28,20 +28,11 @@
 <section class="blog-wrapper news-wrapper section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-lg-8">
-                <div class="blog-posts">
-                    @foreach ($notices as $notice)
-                    <div class="single-blog-post">
-                        <div class="post-featured-thumb bg-cover" style="background-image: url('{{ asset('public/'.$notice->image) }}');background-size: contain !important;"></div>
-                        <div class="post-content">
-                            <h2><a href="#">{{ $notice->title }}</a></h2>
-                        </div>
-                    </div>
-
-                    @endforeach
-
+            @foreach ($notices as $notice)
+                <div class="col-12 d-flex justify-content-center mb-5">
+                    <img src="{{ asset('public/'.$notice->image) }}" alt="image"> 
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

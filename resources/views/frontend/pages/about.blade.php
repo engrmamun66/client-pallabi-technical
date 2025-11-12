@@ -19,7 +19,7 @@
                 <div class="col-lg-6 pl-lg-5 mt-5 mt-lg-0 col-12">
                     <div class="about-right-img">
                         <span class="dot-circle"></span>
-                        <div class="about-us-img" style="background-image: url('{{ asset('public/'.$latestAboutSection->image) }}')">
+                        <div class="about-us-img" style="background-image: url('{{ asset('public/'.$latestAboutSection->image) }}');background-position: center; background-size: cover; background-repeat: no-repeat;">
                         </div>
                         <span class="triangle-bottom-right"></span>
                     </div>

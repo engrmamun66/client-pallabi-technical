@@ -21,7 +21,9 @@
                             running fully with more than ten (10) employees. Our trained students can able to </p>
 
                         <div class="about-check-list d-flex">
-                            <div class="banner bg-cover" style="background-image: url('assets/img/about_list.jpg')"></div>
+                            <div class="banner bg-cover" style="background-image: url(' {{ asset('frontend/assets/img/about_list.jpg') }} ');background-position: center; background-size: cover; background-repeat: no-repeat;">
+                                
+                            </div>
 
                             <ul class="checked-list">
                                 <li>Think critically</li>
@@ -36,10 +38,10 @@
                     <div class="col-xl-6 col-md-10 col-lg-6 pl-xl-5 col-12 mt-5 mt-xl-0">
                         <div class="about-thum">
                             <div class="item top-image text-right">
-                                <img src="{{ asset('frontend/assets/img/about-big-thumb-1.jpg') }}" alt="rrdevs">
+                                <img src="{{ asset('frontend/assets/img/plumbing.jpg') }}" alt="rrdevs" style="width: 400px;transform: translate(0px, 80px);">
                             </div>
                             <div class="item bottom-image">
-                                <img src="{{ asset('frontend/assets/img/about-big-thumb-2.jpg') }}" alt="rrdevs">
+                                <img src="{{ asset('frontend/assets/img/welding.jpg') }}" alt="rrdevs" style="width: 410px;transform: translate(8px, 50px);">
                             </div>
                         </div>
                     </div>
@@ -120,7 +122,7 @@
             </svg>
         </section>
 
-        <div class="client-brand-logo-wrap techex-landing-page  section-padding-3 bg-white">
+        <!-- <div class="client-brand-logo-wrap techex-landing-page  section-padding-3 bg-white">
             <div class="container">
                 <div class="brand-carousel-active d-flex justify-content-between owl-carousel">
                     @php
@@ -134,10 +136,10 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
-          <section class="case-study-carousel-wrapper style-2">
+          <section class="case-study-carousel-wrapper style-2 pt-100">
             <div class="container">
                 <div class="row mb-70">
                     <div class="col-lg-6 col-12">

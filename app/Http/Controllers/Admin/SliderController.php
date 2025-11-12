@@ -147,22 +147,28 @@ class SliderController extends Controller
 
                 $data = $request->all();
                 // image  start
-                if ($request->hasFile('image')) {
-                    if ($request->file('image')->isValid()) {
-                        unlink(public_path($slider->image));
-                       $destinationPath = public_path('backend/media/setting/slider/');
-                       $extension = $request->file('image')->getClientOriginalExtension();
-                       $fileName = time() . '.' . $extension;
-                       $file_path = 'backend/media/setting/slider/' . $fileName;
-                       $request->file('image')->move($destinationPath, $fileName);
-                       $data['image'] = $file_path;
-                    } else {
+                  if ($request->hasFile('image')) {
+                    if ($request->file('image') && $request->file('image')->isValid()) {
+                        $oldImagePath = public_path($slider->image);
+
+                        if (!empty($slider->image) && file_exists($oldImagePath)) {
+                           @unlink($oldImagePath);
+                        }
+
+                        $destinationPath = public_path('backend/media/setting/slider/');
+                        $extension = $request->file('image')->getClientOriginalExtension();
+                        $fileName = time() . '.' . $extension;
+                        $file_path = 'backend/media/setting/slider/' . $fileName;
+
+                        $request->file('image')->move($destinationPath, $fileName);
+                        $data['image'] = $file_path;
+                     } else {
                        return response()->json([
                          'type' => 'error',
                          'message' => "<div class='alert alert-warning'>Please! File is not valid</div>"
                        ]);
                     }
-                 }
+                  }
                 // image end
 
                DB::beginTransaction();
