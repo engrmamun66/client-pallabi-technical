@@ -30,7 +30,7 @@ class StudentController extends Controller
     public function getAll()
    {
 
-      $students = Student::all();
+      $students = Student::all()->sortByDesc('id');
       return Datatables::of($students)
         ->addColumn('status', function ($students) {
            return $students->user?->status ? '<label class="badge badge-success">Active</label>' : '<label class="badge badge-danger">Inactive</label>';
@@ -77,7 +77,7 @@ class StudentController extends Controller
               'password' => 'required|same:confirm-password',
               'fathers_name' => 'required|string|max:255',
               'address' => 'required|string|max:255',
-              'mobile' => 'required|digits:11|unique:students',
+              'mobile' => 'required|unique:students',
               'image' => 'required|image|max:2024|mimes:jpeg,jpg,png'
             ];
 
@@ -169,7 +169,7 @@ class StudentController extends Controller
            'nid_or_passport' => ['nullable','string', Rule::unique('students')->ignore($student->id),],
            'fathers_name' => 'required|string|max:255',
            'address' => 'required|string|max:255',
-           'mobile' => ['required','digits:11', Rule::unique('students')->ignore($student->id),],
+           'mobile' => ['required',Rule::unique('students')->ignore($student->id),],
            'image' => 'nullable|image|max:2024|mimes:jpeg,jpg,png'
          ];
 

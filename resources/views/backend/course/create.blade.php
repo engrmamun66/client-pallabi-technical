@@ -91,7 +91,10 @@
                 }
             },
             submitHandler: function(form) {
-
+               // IMPORTANT: Update textarea with CKEditor content
+                for (var instance in CKEDITOR.instances) {
+                    CKEDITOR.instances[instance].updateElement();
+                }
                 var myData = new FormData($("#create")[0]);
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 myData.append('_token', CSRF_TOKEN);

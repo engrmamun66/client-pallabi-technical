@@ -26,7 +26,7 @@ class CourseController extends Controller
     public function getAll()
    {
 
-      $courses = Course::all();
+      $courses = Course::all()->sortByDesc('id');
       return Datatables::of($courses)
         ->addColumn('image', function ($courses) {
            return "<img src='" . asset('public/'.$courses->image) . "' class='img-thumbnail' width='50px'>";
@@ -205,7 +205,10 @@ class CourseController extends Controller
         abort_if(Gate::denies('course_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         if ($request->ajax()) {
             if($course->image){
-                unlink(public_path($course->image));
+               if ($course->image && file_exists(public_path($course->image))) {
+                  unlink(public_path($course->image));
+               }
+               
                $course->delete();
             }else{
 
